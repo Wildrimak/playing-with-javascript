@@ -1,3 +1,4 @@
+// Funcao construtora
 function Produto(nome, preco, desc = 0.5) {
 
     this.nome = nome
