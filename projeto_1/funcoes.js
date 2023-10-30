@@ -1,8 +1,36 @@
-const teste1 = () => console.log('funcao 1...') 
+const fs = require('fs')
 
-const teste2 = () => console.log('funcao 2...')
 
+
+const obterArquivosDeLegendasValidas = (diretorio) => {
+
+    return new Promise((resolve, reject) => {
+
+        fs.readdir(diretorio, (err, files) => {
+
+            if (err) {
+                console.error('Erro ao ler o diretório', err)
+                reject(err)
+            }
+
+            resolve({
+                'arquivos': files,
+                'diretorio': diretorio
+            })
+
+        })
+
+    });
+}
+
+const lerArquivo = (caminho) => {
+    return new Promise(resolve => {
+        fs.readFile(caminho, (_, conteudo) => {
+            resolve(conteudo.toString())
+        })
+    });
+}
 
 module.exports = {
-    teste1, teste2
+    obterArquivosDeLegendasValidas, lerArquivo
 }
