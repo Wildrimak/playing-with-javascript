@@ -4,7 +4,7 @@ const path = require('path')
 
 function getArrayArquivos() {
 
-    const diretorio = '../legendas'
+    const diretorio = path.join('..', 'dados', 'legendas')
     const pathResultado = './resultado.json'
 
     console.time("Time")

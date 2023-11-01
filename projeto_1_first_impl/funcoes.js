@@ -1,7 +1,5 @@
 const fs = require('fs')
 
-
-
 const obterArquivosDeLegendasValidas = (diretorio) => {
 
     return new Promise((resolve, reject) => {
