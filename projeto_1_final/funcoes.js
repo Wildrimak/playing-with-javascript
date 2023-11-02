@@ -4,11 +4,10 @@ const path = require('path')
 function lerDiretorio(caminho) {
     return new Promise((resolve, reject) => {
         try {
-            let arquivos = fs.readdirSync(caminho)
-            //console.log(Array.isArray(arquivos));
-            //console.log(arquivos);
-            arquivos = arquivos.map(arquivo => path.join(caminho, arquivo))
-            resolve(arquivos)
+            const arquivos = fs.readdirSync(caminho)
+            const arquivosCompletos = arquivos
+                .map(arquivo => path.join(caminho, arquivo))
+            resolve(arquivosCompletos)
         } catch (error) {
             reject(error)
         }
@@ -19,11 +18,9 @@ function lerDiretorio(caminho) {
 function removerSimbolos(simbolos) {
     return function (array) {
         return array.map(el => {
-            let textSemSimbolos = el
-            simbolos.forEach(simbolo => {
-                textSemSimbolos = textSemSimbolos.split(simbolo).join('')
-            });
-            return textSemSimbolos
+            return simbolos.reduce((acc, simbolo) => {
+                return acc.split(simbolo).join('')
+            }, el)
         })
     }
 }
@@ -84,6 +81,15 @@ function agruparElementos(palavras) {
     }, {}))
 }
 
+function ordenarPorAtribNumerico(attr, ordem = 'asc') {
+    return function (array) {
+        const asc = (o1, o2) => o1[attr] - o2[attr]
+        const desc = (o1, o2) => o2[attr] - o1[attr]
+        return array.sort(ordem === 'asc' ? asc : desc)
+
+    }
+}
+
 module.exports = {
     lerDiretorio,
     elementosTerminadoCom,
@@ -94,5 +100,6 @@ module.exports = {
     removerSimbolos,
     mesclarElementos,
     separarTextoPor,
-    agruparElementos
+    agruparElementos,
+    ordenarPorAtribNumerico
 }
