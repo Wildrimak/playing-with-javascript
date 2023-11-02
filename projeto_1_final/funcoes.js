@@ -17,7 +17,7 @@ function lerDiretorio(caminho) {
 }
 
 function removerSimbolos(simbolos) {
-    return function(array) {
+    return function (array) {
         return array.map(el => {
             let textSemSimbolos = el
             simbolos.forEach(simbolo => {
@@ -70,9 +70,18 @@ function removerElementoSeApenasNumero(array) {
 const mesclarElementos = conteudos => conteudos.join(' ')
 
 function separarTextoPor(simbolo) {
-    return function(texto) {
+    return function (texto) {
         return texto.split(simbolo)
     }
+}
+
+function agruparElementos(palavras) {
+    return Object.values(palavras.reduce((acc, palavra) => {
+        const el = palavra.toLowerCase()
+        const qtde = acc[el] ? acc[el].qtde + 1 : 1
+        acc[el] = { elemento: el, qtde }
+        return acc
+    }, {}))
 }
 
 module.exports = {
@@ -84,5 +93,6 @@ module.exports = {
     removerElementoSeApenasNumero,
     removerSimbolos,
     mesclarElementos,
-    separarTextoPor
+    separarTextoPor,
+    agruparElementos
 }

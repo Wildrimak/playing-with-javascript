@@ -9,14 +9,7 @@ const simbolos = [
     '(', ')'
 ]
 
-function agruparPlavras(palavras) {
-    return palavras.reduce((acc, palavra) => {
-        const p = palavra.toLowerCase()
-        const qtde = acc[p] ? acc[p].qtde + 1 : 1
-        acc[p] = { elemento: p, qtde }
-        return acc
-    }, {})
-}
+
 
 fn.lerDiretorio(caminho)
     .then(fn.elementosTerminadoCom('.srt'))
@@ -31,5 +24,5 @@ fn.lerDiretorio(caminho)
     .then(fn.separarTextoPor(' '))
     .then(fn.removerElementosSeVazio)
     .then(fn.removerElementoSeApenasNumero)
-    .then(agruparPlavras)
+    .then(fn.agruparElementos)
     .then(console.log)  
