@@ -1,18 +1,18 @@
 function componha(fn1, fn2) {
-    return function(valor) {
+    return function (valor) {
         return fn2(fn1(valor))
     }
 }
 
 const dizerOla = who => "Olá " + who
 const dizerComportamento = who => who + " vá para o hotel!"
-  
+
 const dizOlaEComportamento = componha(dizerOla, dizerComportamento)
 const r = dizOlaEComportamento("wildrimak")
 console.log(r)
 
 function composicao(...fns) {
-    return function(valor) {
+    return function (valor) {
         return fns.reduce((acc, fn) => {
             return fn(acc)
         }, valor)
@@ -37,10 +37,19 @@ function tornarLento(texto) {
     return texto.split('').join(' ')
 }
 
-const resultado = composicao(
+const exagerado = composicao(
     gritar,
     enfatizar,
     tornarLento
-)('PARA')
+)
 
-console.log(resultado);
+const umPoucoMenosExagerado = composicao(
+    gritar,
+    enfatizar
+)
+
+const resultado1 = exagerado('PARA')
+const resultado2 = umPoucoMenosExagerado('Cuidado com o buraco!!!')
+
+console.log(resultado1);
+console.log(resultado2);
