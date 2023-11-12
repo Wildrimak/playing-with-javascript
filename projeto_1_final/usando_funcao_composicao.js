@@ -9,7 +9,8 @@ const simbolos = [
     '(', ')'
 ]
 
-const functionExpectArray = fn.composicao(
+const palavrasMaisUsadas = fn.composicao(
+    fn.lerDiretorio,
     fn.elementosTerminadoCom('.srt'),
     fn.lerArquivos,
     fn.mesclarElementos,
@@ -23,8 +24,8 @@ const functionExpectArray = fn.composicao(
     fn.removerElementosSeVazio,
     fn.removerElementoSeApenasNumero,
     fn.agruparElementos,
-    fn.ordenarPorAtribNumerico('qtde', 'desc'),
-    console.log
+    fn.ordenarPorAtribNumerico('qtde', 'desc')
 )
 
-functionExpectArray(fn.lerDiretorio(caminho))
+palavrasMaisUsadas(caminho)
+    .then(console.log)
